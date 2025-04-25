@@ -13,7 +13,6 @@ import type { SelectChangeEvent } from "@mui/material/Select";
 import Snackbar from "@mui/material/Snackbar";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
-import IconButton from "@mui/material/IconButton";
 import List from "@mui/material/List";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
@@ -29,8 +28,6 @@ import ClearIcon from "@mui/icons-material/Clear";
 import RefreshIcon from "@mui/icons-material/Refresh";
 import SaveIcon from "@mui/icons-material/Save";
 import HistoryIcon from "@mui/icons-material/History";
-import LanguageIcon from "@mui/icons-material/Language";
-import InsertLinkIcon from "@mui/icons-material/InsertLink";
 
 interface AnalysisResult {
   sentiment: "positive" | "negative" | "neutral" | "misleading" | "real";
@@ -54,7 +51,6 @@ const FakeNewsDetector: React.FC = () => {
   const [language, setLanguage] = useState<string>("en");
   const [detectedLanguage, setDetectedLanguage] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [isExtracting, setIsExtracting] = useState<boolean>(false);
   const [result, setResult] = useState<AnalysisResult | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [history, setHistory] = useState<HistoryItem[]>([]);
@@ -88,10 +84,6 @@ const FakeNewsDetector: React.FC = () => {
 
   const handleTextChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setText(event.target.value);
-  };
-
-  const handleUrlChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setUrl(event.target.value);
   };
 
   const handleApiKeyChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -132,7 +124,6 @@ const FakeNewsDetector: React.FC = () => {
     });
     setShowHistory(false);
   };
-
 
   const analyzeSentiment = async (): Promise<void> => {
     if (!text.trim()) {
