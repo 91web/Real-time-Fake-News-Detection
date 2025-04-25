@@ -26,7 +26,7 @@ import HelpIcon from "@mui/icons-material/Help";
 import WarningIcon from "@mui/icons-material/Warning";
 import ClearIcon from "@mui/icons-material/Clear";
 import RefreshIcon from "@mui/icons-material/Refresh";
-import SaveIcon from "@mui/icons-material/Save";
+
 import HistoryIcon from "@mui/icons-material/History";
 
 interface AnalysisResult {
