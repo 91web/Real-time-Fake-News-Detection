@@ -54,19 +54,12 @@ const FakeNewsDetector: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [history, setHistory] = useState<HistoryItem[]>([]);
   const [showHistory, setShowHistory] = useState<boolean>(false);
-  const [apiKey, setApiKey] = useState<string>("");
-  const [showApiKeyInput, setShowApiKeyInput] = useState<boolean>(false);
 
   // Load saved data from localStorage on component mount
   useEffect(() => {
     const savedHistory = localStorage.getItem("sentiment_history");
     if (savedHistory) {
       setHistory(JSON.parse(savedHistory));
-    }
-
-    const savedApiKey = localStorage.getItem("gemini_api_key");
-    if (savedApiKey) {
-      setApiKey(savedApiKey);
     }
   }, []);
 
@@ -85,19 +78,8 @@ const FakeNewsDetector: React.FC = () => {
     setText(event.target.value);
   };
 
-  const handleApiKeyChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setApiKey(event.target.value);
-  };
-
-  const saveApiKey = () => {
-    if (!apiKey.trim()) {
-      setError("Please enter a valid API key");
-      return;
-    }
-
-    localStorage.setItem("gemini_api_key", apiKey);
-    setShowApiKeyInput(false);
-  };
+  // API key has been hardcoded to avoid user prompt
+  const API_KEY = "AIzaSyBujYm5-beShxvuANku22XRyAVyGWRe2gU";
 
   const clearInput = () => {
     setText("");
@@ -130,18 +112,12 @@ const FakeNewsDetector: React.FC = () => {
       return;
     }
 
-    if (!apiKey) {
-      setError("Please enter your Gemini API key");
-      setShowApiKeyInput(true);
-      return;
-    }
-
     setIsLoading(true);
     setError(null);
 
     try {
       // Gemini API endpoint - using gemini-2.0-flash model
-      const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+      const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${API_KEY}`;
 
       // Build prompt
       const prompt = `
@@ -244,7 +220,6 @@ News to analyze: "${text}"
   const getSentimentIcon = () => {
     if (!result) return null;
 
-
     switch (result.sentiment) {
       case "positive":
         return (
@@ -291,27 +266,6 @@ News to analyze: "${text}"
           <Typography variant="h4" gutterBottom>
             Fake News Detector
           </Typography>
-
-          {/* API Key Input */}
-          {showApiKeyInput && (
-            <Box sx={{ mb: 2, display: "flex", alignItems: "center", gap: 1 }}>
-              <TextField
-                fullWidth
-                label="Gemini API Key"
-                type="password"
-                value={apiKey}
-                onChange={handleApiKeyChange}
-                size="small"
-              />
-              <Button
-                variant="contained"
-                startIcon={<SaveIcon />}
-                onClick={saveApiKey}
-              >
-                Save
-              </Button>
-            </Box>
-          )}
 
           {/* Language Selector */}
           <FormControl fullWidth sx={{ mb: 2 }}>
