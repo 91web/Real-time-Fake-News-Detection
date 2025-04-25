@@ -49,7 +49,6 @@ const FakeNewsDetector: React.FC = () => {
   const [text, setText] = useState<string>("");
   const [url, setUrl] = useState<string>("");
   const [language, setLanguage] = useState<string>("en");
-  const [detectedLanguage, setDetectedLanguage] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [result, setResult] = useState<AnalysisResult | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -218,7 +217,6 @@ News to analyze: "${text}"
         confidence,
         explanation: jsonResponse.explanation || "No explanation provided",
         classification: jsonResponse.classification || "Neutral",
-        detectedLanguage: detectedLanguage || language,
       };
 
       setResult(analysisResult);
@@ -246,9 +244,6 @@ News to analyze: "${text}"
   const getSentimentIcon = () => {
     if (!result) return null;
 
-    const iconProps = {
-      sx: { mr: 1 },
-    };
 
     switch (result.sentiment) {
       case "positive":
