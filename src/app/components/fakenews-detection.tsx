@@ -260,7 +260,7 @@ News to analyze: "${text}"
   };
 
   return (
-    <Box sx={{ maxWidth: 800, mx: "auto", p: 3 }}>
+    <Box>
       <Card>
         <CardContent>
           <Typography variant="h4" gutterBottom>
@@ -294,33 +294,45 @@ News to analyze: "${text}"
             sx={{ mb: 2 }}
           />
 
-          {/* Action Buttons */}
-          <Box sx={{ display: "flex", gap: 2, mb: 2 }}>
+            {/* Action Buttons */}
+            <Box
+            sx={{
+              display: "flex",
+              flexDirection: { xs: "column", sm: "row" },
+              gap: 2,
+              mb: 2,
+            }}
+            >
             <Button
+              fullWidth
               variant="contained"
               onClick={analyzeSentiment}
               disabled={isLoading || !text.trim()}
               startIcon={
-                isLoading ? <CircularProgress size={20} /> : <RefreshIcon />
+              isLoading ? <CircularProgress size={20} /> : <RefreshIcon />
               }
             >
               {isLoading ? "Analyzing..." : "Analyze News"}
             </Button>
             <Button
+              fullWidth
               variant="outlined"
               onClick={clearInput}
               startIcon={<ClearIcon />}
+              sx={{ fontSize: { xs: "12px", sm: "20px" } }}
             >
               Clear
             </Button>
             <Button
+              fullWidth
               variant="outlined"
               onClick={() => setShowHistory(!showHistory)}
               startIcon={<HistoryIcon />}
+              sx={{ fontSize: { xs: "12px", sm: "20px" } }}
             >
               History ({history.length})
             </Button>
-          </Box>
+            </Box>
 
           {/* Error Display */}
           {error && (
@@ -351,7 +363,7 @@ News to analyze: "${text}"
                 </Typography>
               </Box>
               <Box sx={{ display: "flex", alignItems: "center", mb: 1 }}>
-                <Typography variant="subtitle1" sx={{ mr: 1 }}>
+                <Typography variant="subtitle1" sx={{ mr: 3 }}>
                   Confidence:
                 </Typography>
                 <Badge

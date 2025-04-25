@@ -30,7 +30,7 @@ const FAppBar = () => {
           >
             <ColorfulBox>
               <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-                <Box>
+                <Box display={{ xs: "none", sm: "block" }}>
                   <Image
                     src={News}
                     alt="News"
@@ -42,11 +42,11 @@ const FAppBar = () => {
 
                 <Box>
                   <Typography
-                    variant="h6"
                     sx={{
                       color: "white",
                       fontWeight: "bold",
                       textAlign: "center",
+                      fontSize: { xs: "10px", sm: "20px" },
                     }}
                   >
                     Real-Time Fake News Detection
