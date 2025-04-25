@@ -55,9 +55,8 @@ const SlideHero = () => {
             width: { xs: "85%", md: "100%" },
           }}
         >
-          This is the story of it has grown over the years to provide
-          innovative and reliable tools that empower users to discern credible
-          information.
+          This is the story of it has grown over the years to provide innovative
+          and reliable tools that empower users to discern credible information.
         </Typography>
       </Box>
       <Box my={8}>
@@ -67,6 +66,9 @@ const SlideHero = () => {
           spaceBetween={8}
           slidesPerView={6}
           loop={true}
+          style={{
+            height: "220px",
+          }}
           autoplay={{ delay: 2500, disableOnInteraction: false }} // Autoplay with a 2.5 second interval
           pagination={{ clickable: true }}
           breakpoints={{
@@ -78,9 +80,7 @@ const SlideHero = () => {
         >
           {images.map((image, index) => (
             <SwiperSlide key={index}>
-              <Card
-                elevation={0}
-                sx={{ minWidth: 200, margin: "0 8px" }}>
+              <Card elevation={0} sx={{ minWidth: 200, margin: "0 8px" }}>
                 <CardMedia
                   sx={{ height: 150, width: 200 }}
                   image={image.src}
